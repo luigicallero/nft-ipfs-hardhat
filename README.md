@@ -1,16 +1,16 @@
-# 🏗 Scaffold-ETH - 🎟 Simple NFT Example
+# NFT using IPFS with HardHat
+### Based on the master piece from Austin Griffith: Scaffold-ETH - Simple NFT Example
+>https://github.com/austintgriffith/scaffold-eth/tree/simple-nft-example
 
-> Build, mint, and send around your own ERC721!
 
 # 🏃‍♀️ Quick Start
 Required: [Node](https://nodejs.org/dist/latest-v12.x/) plus [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable) and [Git](https://git-scm.com/downloads)
 
 ```
-git clone https://github.com/austintgriffith/scaffold-eth.git simple-nft-example
+git clone https://github.com/luigicallero/nft-ipfs-hardhat.git
 ```
 ```
-cd simple-nft-example
-git checkout simple-nft-example
+cd nft-ipfs-hardhat
 yarn install
 yarn start
 ```
@@ -67,18 +67,21 @@ yarn mint
 
 ⬇️ Installing a new package to your frontend? You need to `cd packages/react-app` and then `yarn add PACKAGE`
 
-# 📡 Deploy NFT smart contract!
+# 📡 Deploy NFT smart contract on Rinkeby
 
-🛰 Ready to deploy to a testnet?
-> Change the `defaultNetwork` in `packages/hardhat/hardhat.config.js`
+> In `packages/hardhat/hardhat.config.js` change the `localhost` network with `rinkeby` 
+> In that same file update the rinkeby settings with your INFURA ID
+// Create at the root directory of the project the .env file with your secret phrase from Metamask
 
 ![nft6](https://user-images.githubusercontent.com/526558/124387061-7a0f1e80-dcb3-11eb-9f4c-19229f43adec.png)
 
-🔐 Generate a deploy account with `yarn generate`
+🔐 Generate a deploy account with `yarn generate`. This will create a wallet to be used in Rinkeby and the mnemonic file will be generated in hardhat folder.
 
 ![nft7](https://user-images.githubusercontent.com/526558/124387064-7d0a0f00-dcb3-11eb-9d0c-195f93547fb9.png)
 
-👛 View your deployer address using `yarn account` (You'll need to fund this account. Hint: use an instant wallet to fund your account via QR code)
+👛 View your deployer address using `yarn account` 
+
+⛽️ Fund this account, using an instant wallet to fund your account via QR code (like xdai.io) or Grab some gas using the faucet: https://www.rinkeby.io/#faucet. Confirm the wallet is funded with `yarn account`
 
 ![nft8](https://user-images.githubusercontent.com/526558/124387068-8004ff80-dcb3-11eb-9d0f-43fba2b3b791.png)
 
@@ -86,35 +89,26 @@ yarn mint
 ```
 yarn deploy
 ```
-> ✏️ Edit your frontend `App.jsx` in `packages/react-app/src` to change the `targetNetwork` to wherever you deployed your contract:
+> ✏️ In `packages/react-app/src` edit your frontend `App.jsx`  to change the `targetNetwork` to wherever you deployed your contract:
+```
+/// 📡 What chain are your contracts deployed to?
+//const targetNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const targetNetwork = NETWORKS.rinkeby;
+```
 
-![nft9](https://user-images.githubusercontent.com/526558/124387095-9743ed00-dcb3-11eb-8ea5-afc25d7fef80.png)
-
-You should see the correct network in the frontend:
+You should see the network "rinkeby" in the frontend right below account ammount:
 
 ![nft10](https://user-images.githubusercontent.com/526558/124387099-9a3edd80-dcb3-11eb-9a57-54a7d370589a.png)
 
-An instant wallet running on xDAI insired by xdai.io.
-🎫 Ready to mint a batch of NFTs for reals?
+🎫 Mint a batch of NFTs for reals?
 ```
 yarn mint
-
-await tenderlyVerify(
-  {contractName: "YourContract",
-   contractAddress: yourContract.address
-})
 ```
-Make sure your target network is present in the hardhat networks config, then either update the default network in `hardhat.config.js` to your network of choice or run:
-```
-yarn deploy --network NETWORK_OF_CHOICE
-```
-Once verified, they will then be available to view on Tenderly!
-
 ![nft11](https://user-images.githubusercontent.com/526558/124387132-b04c9e00-dcb3-11eb-95d1-03b8c272e52f.png)
 
 # ⚔️ Side Quests
 ## 🐟 Open Sea
-> Add your contract to OpenSea ( create -> submit NFTs -> "or add an existing contract" )
+> Add your contract to Testnet OpenSea (add your contract here: https://testnets.opensea.io/get-listed/step-two )
 
 (It can take a while before they show up, but here is an example:)
 https://testnets.opensea.io/assets/0xc2839329166d3d004aaedb94dde4173651babccf/1
